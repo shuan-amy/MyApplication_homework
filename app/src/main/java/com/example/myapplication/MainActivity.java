@@ -13,18 +13,19 @@ import android.widget.TextView;
 
 //              類別名稱     延伸 (MainActivity  繼承 AppCompatActivity )
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+
     final String TAG = this.getClass().getSimpleName();  // 常數(不會變)
+    static int count = 0 ; // 靜態變數  用來計算應用程式有多少物件
 
-    // 類別  參照
-
-    //Button bt ;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) { // function,函式
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Log.d(TAG, "enter onCreate()");
+        count++; //遞增運算子 : 等於count = count + 1;
+
+        Log.d(TAG, "enter onCreate(). #" + count ); // 3+4, +:運算子  3、4 運算元
 
     }
 
@@ -39,25 +40,26 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onStart();
         // 找到view root，然後設定click監聽
         findViewById(android.R.id.content).setOnClickListener(this);
-        Log.d(TAG, "enter onStart()");
+        Log.d(TAG, "enter onStart(). #" + count );
     }
 
     @Override
     protected void onStop() {
-        Log.d(TAG, "enter onStop()");
+        Log.d(TAG, "enter onStop(). #" + count );
         super.onStop();
     }
 
 
     @Override
     protected void onDestroy() {
-        Log.d(TAG, "enter onDestroy()");
+        Log.d(TAG, "enter onDestroy(). #" + count );
+        count--;
         super.onDestroy();
     }
 
     @Override
     protected void onPause() {
-        Log.d(TAG, "enter onPause()");
+        Log.d(TAG, "enter onPause(). #" + count );
         super.onPause();
     }
 
@@ -65,13 +67,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onResume() {
 
         super.onResume();
-        Log.d(TAG, "enter onResume()");
+        Log.d(TAG, "enter onResume(). #" + count );
     }
 
     @Override
     protected void onRestart() {
         super.onRestart();
-        Log.d(TAG, "enter onRestart()");
+        Log.d(TAG, "enter onRestart(). #" + count );
     }
 
     @Override

@@ -2,6 +2,7 @@ package com.example.myapplication;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
@@ -13,19 +14,22 @@ import android.widget.TextView;
 //              類別名稱     延伸 (MainActivity  繼承 AppCompatActivity )
 public class Bookkeeping extends AppCompatActivity implements View.OnClickListener {
     final String TAG = this.getClass().getSimpleName();  // 常數(不會變)
+    static int count = 0 ;
+
 
     // 類別  參照
     TextView theDate , theTime ;
     Button btSave;
-    //Button bt ;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.bookkeeping_contraintlayout);
 
-        Log.d(TAG, "enter onCreate()");
         uiInit();
+        count++ ;
+        Log.d(TAG, "enter onCreate(). #" + count);
     }
 
     private void uiInit() {
@@ -44,7 +48,7 @@ public class Bookkeeping extends AppCompatActivity implements View.OnClickListen
         super.onStart();
         varInit();
         setUiListener();
-        Log.d(TAG, "enter onStart()");
+        Log.d(TAG, "enter onStart(). #" + count);
     }
 
     private void setUiListener() {
@@ -56,9 +60,15 @@ public class Bookkeeping extends AppCompatActivity implements View.OnClickListen
     private void varInit() {
     }
 
+    private void registerListener() {   //  ???
+        theDate.setOnClickListener(this);
+        theTime.setOnClickListener(this);
+        btSave.setOnClickListener(this);
+    }
+
     @Override
     protected void onStop() {
-        Log.d(TAG, "enter onStop()");
+        Log.d(TAG, "enter onStop(). #" + count);
         releaseUiListener();
         super.onStop();
     }
@@ -71,13 +81,14 @@ public class Bookkeeping extends AppCompatActivity implements View.OnClickListen
 
     @Override
     protected void onDestroy() {
-        Log.d(TAG, "enter onDestroy()");
+        Log.d(TAG, "enter onDestroy(). #" + count);
+        count--; // count = count - 1
         super.onDestroy();
     }
 
     @Override
     protected void onPause() {
-        Log.d(TAG, "enter onPause()");
+        Log.d(TAG, "enter onPause(). #" + count);
         super.onPause();
     }
 
@@ -85,13 +96,13 @@ public class Bookkeeping extends AppCompatActivity implements View.OnClickListen
     protected void onResume() {
 
         super.onResume();
-        Log.d(TAG, "enter onResume()");
+        Log.d(TAG, "enter onResume(). #" + count);
     }
 
     @Override
     protected void onRestart() {
         super.onRestart();
-        Log.d(TAG, "enter onRestart()");
+        Log.d(TAG, "enter onRestart(). #" + count);
     }
 
     @Override
@@ -100,8 +111,17 @@ public class Bookkeeping extends AppCompatActivity implements View.OnClickListen
             case R.id.button:
                 //帳務資料儲存
 
+                //使用startActivity返回上一層
+                startActivity(new Intent(this,MainActivity.class));
+
                 //返回主畫面
-                Bookkeeping.this.finish();// 也可以直接寫finish() 因為Onclick是包含在Bookkeeping裡面
+                //Bookkeeping.this.finish();// 也可以直接寫finish() 因為Onclick是包含在Bookkeeping裡面
+
+                //增加過場動畫
+                overridePendingTransition(android.R.anim.slide_in_left,
+                                          android.R.anim.slide_out_right  );
+
+
                 break;
         }
     }
