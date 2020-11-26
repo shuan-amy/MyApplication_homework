@@ -78,13 +78,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View v) {
         switch(v.getId()){
             case android.R.id.content:
-                startActivity(new Intent(this, Bookkeeping.class ));
+                startActivity(new Intent(this, Bookkeeping.class )); // 建立一個新的Activity
 
                 // 增加過場動畫
                 overridePendingTransition(android.R.anim.slide_in_left,
                         android.R.anim.slide_out_right);
                 //強迫activity中止
                 MainActivity.this.finish();
+                break;
 
         }
     }

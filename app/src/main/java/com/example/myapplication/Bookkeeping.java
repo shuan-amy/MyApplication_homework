@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Switch;
 import android.widget.TextView;
 
 //              類別名稱     延伸 (MainActivity  繼承 AppCompatActivity )
@@ -15,6 +16,7 @@ public class Bookkeeping extends AppCompatActivity implements View.OnClickListen
 
     // 類別  參照
     TextView theDate , theTime ;
+    Button btSave;
     //Button bt ;
 
     @Override
@@ -29,6 +31,8 @@ public class Bookkeeping extends AppCompatActivity implements View.OnClickListen
     private void uiInit() {
         theDate = findViewById(R.id.textView6);
         theTime = findViewById(R.id.textView7);
+
+        btSave = findViewById(R.id.button);
     }
 
     //public MainActivity() {
@@ -46,6 +50,7 @@ public class Bookkeeping extends AppCompatActivity implements View.OnClickListen
     private void setUiListener() {
         theDate.setOnClickListener(this);
         theTime.setOnClickListener(this);
+        btSave.setOnClickListener(this);
     }
 
     private void varInit() {
@@ -61,6 +66,7 @@ public class Bookkeeping extends AppCompatActivity implements View.OnClickListen
     private void releaseUiListener() {
         theDate.setOnClickListener(null);
         theTime.setOnClickListener(null);
+        btSave.setOnClickListener(null);
     }
 
     @Override
@@ -90,7 +96,14 @@ public class Bookkeeping extends AppCompatActivity implements View.OnClickListen
 
     @Override
     public void onClick(View v) {
+        switch(v.getId()){
+            case R.id.button:
+                //帳務資料儲存
 
+                //返回主畫面
+                Bookkeeping.this.finish();// 也可以直接寫finish() 因為Onclick是包含在Bookkeeping裡面
+                break;
+        }
     }
 }
 
