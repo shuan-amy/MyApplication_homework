@@ -19,7 +19,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     final String TAG = this.getClass().getSimpleName();  // 常數(不會變)
     static int count = 0 ; // 靜態變數  用來計算應用程式有多少物件
-
+    final int demoCase = 1 ; // 0: click on switch   1: use handler
 
     @Override
     protected void onCreate(Bundle savedInstanceState) { // function,函式
@@ -36,17 +36,28 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onStart() {
         super.onStart();
-        // 找到view root，然後設定click監聽
-        //findViewById(android.R.id.content).setOnClickListener(this);
         Log.d(TAG, "enter onStart(). #" + count );
 
-        //使用Handler自動切換螢幕
-        Message msg = myHandler.obtainMessage(); // 從Message pool裡面取一個message出來
-                                                // 比新建立一個有效率
-                                                // Ctr+Q 查看指令文件
-        myHandler.sendMessageDelayed(msg,500); // 0.5秒後執行
+
+        switch(demoCase){
+            case 0:
+                //找到此Activity的root View，並增加click監聽
+                (this.findViewById(android.R.id.content)).setOnClickListener(this);
+                break ;
+            case 1:
+                //使用Handler自動切換螢幕
+                Message msg = myHandler.obtainMessage();    // 從Message pool裡面取一個message出來
+                                                            // 比新建立一個有效率
+                                                            // Ctr+Q 查看指令文件
+                myHandler.sendMessageDelayed(msg,500); // 0.5秒後執行
+
+                break;
+        }
+
+
 
     }
+
 
     @Override
     protected void onStop() {
