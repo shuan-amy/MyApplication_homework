@@ -8,10 +8,12 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
+import android.os.SystemClock;
+import android.util.Log;
 import android.widget.ImageView;
 
 public class CuteDog extends AppCompatActivity {
-
+    final String TAG = this.getClass().getSimpleName();
     ImageView iv ;
     final int IMAGE_ONE = 10001 ;
     final int IMAGE_TWO = 10002 ;
@@ -40,6 +42,7 @@ public class CuteDog extends AppCompatActivity {
 
     @Override
     protected void onStop() {
+        myHandler.removeCallbacksAndMessages(null); // 當跳出程是時去除先前程式的動作
         super.onStop();
     }
 
@@ -50,18 +53,21 @@ public class CuteDog extends AppCompatActivity {
             switch (msg.what){
                 case IMAGE_ONE:
                     iv.setImageResource(R.drawable.ic_dog_rotate_right_1);
+                    Log.d(TAG,"Image_one: " + SystemClock.elapsedRealtime());
                     msg = this.obtainMessage();
                     msg.what = IMAGE_TWO;
                     myHandler.sendMessageDelayed(msg,interval);
                     break;
                 case IMAGE_TWO:
                     iv.setImageResource(R.drawable.ic_dog_rotate_right_2);
+                    Log.d(TAG,"Image_two: " + SystemClock.elapsedRealtime());
                     msg = this.obtainMessage();
                     msg.what = IMAGE_THREE;
                     myHandler.sendMessageDelayed(msg,interval);
                     break;
                 case IMAGE_THREE:
                     iv.setImageResource(R.drawable.ic_dog_rotate_right_3);
+                    Log.d(TAG,"Image_three: " + SystemClock.elapsedRealtime());
                     msg = this.obtainMessage();
                     msg.what = IMAGE_ONE;
                     myHandler.sendMessageDelayed(msg,interval);
