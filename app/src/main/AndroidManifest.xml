@@ -9,14 +9,17 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Bookkeeping"></activity>
         <activity android:name=".MainActivity">
+        </activity>
+        <activity android:name=".Bookkeeping" />
+        <activity android:name=".CuteDog">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-    </application>
+                <!-- 下面這一行是為了要符合google政策和處理Warning訊息 -->
+               <action android:name="android.intent.action.VIEW" />
+               <category android:name="android.intent.category.LAUNCHER" />
+           </intent-filter>
+       </activity>
+   </application>
 
 </manifest>

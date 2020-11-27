@@ -108,6 +108,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
+    // ---------------------使用handler的範例---------------------------------------
     //宣告一個Handler物件，並且連結到UI Thread
     private Handler myHandler = new Handler(Looper.getMainLooper()){
 
@@ -125,6 +126,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
     };
+    // -----------------------------------------------------------------------------
 
 
 
